@@ -20,6 +20,7 @@
         - storage_backend == "nfs"
     - include_role:
         name: mediaserver
+      when: "'mediaservices' in group_names"
     - include_role:
         name: docker
       when: "'mediaservices' in group_names"
