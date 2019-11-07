@@ -9,7 +9,7 @@
   name: docker
 - src: https://github.com/ajanis/ansible-ceph-fs.git
   name: ceph-fs
-- src: https://github.com/ajanis/ansible-mediaserver
+- src: git@github.com:ajanis/ansible-mediaserver
   name: mediaserver
 - src: https://github.com/ajanis/ansible-telegraf
   name: telegraf
