@@ -15,7 +15,7 @@
   name: telegraf
 - src: https://github.com/ajanis/ansible-influxdb.git
   name: influxdb
-- src: https://github.com/ajanis/ansible-grafana.git
+- src: https://github.com/constructorfleet/ansible-grafana.git
   name: grafana
-- src: https://github.com/ajanis/ansible-nfs.git
+- src: git@github.com:ajanis/ansible-nfs.git
   name: nfs
