@@ -7,8 +7,8 @@
   name: common
 - src: https://github.com/ajanis/ansible-docker.git
   name: docker
-- src: https://github.com/ajanis/ansible-cephfs.git
-  name: cephfs
+- src: https://github.com/ajanis/ansible-ceph-fs.git
+  name: ceph-fs
 - src: https://github.com/ajanis/ansible-mediaserver
   name: mediaserver
 - src: https://github.com/ajanis/ansible-telegraf
