@@ -9,13 +9,13 @@
   name: docker
 - src: https://github.com/ajanis/ansible-ceph-fs.git
   name: ceph-fs
-- src: git@github.com:ajanis/ansible-mediaserver
+- src: https://github.com/ajanis/ansible-mediaserver.git
   name: mediaserver
-- src: https://github.com/ajanis/ansible-telegraf
+- src: https://github.com/ajanis/ansible-telegraf.git
   name: telegraf
-- src: https://github.com/ajanis/ansible-influxdb
+- src: https://github.com/ajanis/ansible-influxdb.git
   name: influxdb
-- src: https://github.com/ajanis/ansible-grafana
+- src: https://github.com/ajanis/ansible-grafana.git
   name: grafana
-- src: https://github.com/ajanis/ansible-nfs
+- src: https://github.com/ajanis/ansible-nfs.git
   name: nfs
