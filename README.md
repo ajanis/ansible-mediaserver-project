@@ -1065,9 +1065,11 @@ docker_containers:
         name: common
     - include_role:
         name: mediaserver
+        public: True
       when: "'mediaservices' in group_names"
     - include_role:
         name: docker
+        public: True
       when: "'mediaservices' in group_names"
     - include_role:
         name: nginx
