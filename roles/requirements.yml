@@ -1,0 +1,21 @@
+---
+- src: https://github.com/ajanis/ansible-openldap.git
+  name: openldap
+- src: https://github.com/ajanis/ansible-nginx.git
+  name: nginx
+- src: https://github.com/ajanis/ansible-common.git
+  name: common
+- src: https://github.com/ajanis/ansible-docker.git
+  name: docker
+- src: https://github.com/ajanis/ansible-cephfs.git
+  name: cephfs
+- src: https://github.com/ajanis/ansible-mediaserver
+  name: mediaserver
+- src: https://github.com/ajanis/ansible-telegraf
+  name: telegraf
+- src: https://github.com/ajanis/ansible-influxdb
+  name: influxdb
+- src: https://github.com/ajanis/ansible-grafana
+  name: grafana
+- src: https://github.com/ajanis/ansible-nfs
+  name: nfs

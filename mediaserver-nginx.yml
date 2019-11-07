@@ -1,0 +1,18 @@
+- name: "[Media Server] :: Deploy Plex Media Server, NZB Services (SabNZBd, Sonarr, Radarr, Ombi) Monitoring Services (Tautulli, Telegraf), Web Services (Apache), File Services (Samba,AFP,Avahi) :: Includes Ansible roles for OpenLDAP-Client, CephFS/NFS"
+  hosts: all
+  remote_user: root
+
+  vars_files:
+    - vault.yml
+
+  tasks:
+    - include_role:
+        name: common
+    - include_role:
+        name: mediaserver
+    - include_role:
+        name: docker
+      when: "'mediaservices' in group_names"
+    - include_role:
+        name: nginx
+      when: "'webservices' in group_names"

@@ -1,0 +1,100 @@
+- name: Deploy OpenLDAP Server
+  hosts: ldapserver
+  remote_user: root
+
+  vars_files:
+    - vault.yml
+
+  tasks:
+    - include_role:
+        name: common
+    - include_role:
+        name: openldap
+        public: True
+    - include_role:
+        name: ceph-fs
+      when:
+        - shared_storage
+        - storage_backend == "cephfs"
+    - include_role:
+        name: nfs
+      when:
+        - shared_storage
+        - storage_backend == "nfs"
+    - include_role:
+        name: telegraf
+
+
+- name: Deploy InfluxDB and Grafana
+  hosts: metrics
+  remote_user: root
+
+  vars_files:
+    - vault.yml
+
+  tasks:
+    - include_role:
+        name: common
+    - include_role:
+        name: openldap
+        public: True
+    - include_role:
+        name: ceph-fs
+      when:
+        - shared_storage
+        - storage_backend == "cephfs"
+    - include_role:
+        name: nfs
+      when:
+        - shared_storage
+        - storage_backend == "nfs"
+    - include_role:
+        name: influxdb
+      tags:
+        - install
+        - configure
+        - influxdb
+        - verify
+        - stress
+        - demo
+        - prometheus
+    - include_role:
+        name: grafana
+      tags:
+        - install
+        - configure
+        - grafana
+        - backup
+    - include_role:
+        name: telegraf
+
+
+- name: Deploy Media Server and Services
+  hosts: mediaserver
+  remote_user: root
+
+  vars_files:
+    - vault.yml
+
+  tasks:
+    - include_role:
+        name: common
+    - include_role:
+        name: openldap
+        public: True
+    - include_role:
+        name: ceph-fs
+      when:
+        - shared_storage
+        - storage_backend == "cephfs"
+    - include_role:
+        name: nfs
+      when:
+        - shared_storage
+        - storage_backend == "nfs"
+    - include_role:
+        name: mediaserver
+    - include_role:
+        name: docker
+    - include_role:
+        name: telegraf
