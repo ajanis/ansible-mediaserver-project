@@ -17,5 +17,5 @@
   name: influxdb
 - src: https://github.com/constructorfleet/ansible-grafana.git
   name: grafana
-- src: git@github.com:ajanis/ansible-nfs.git
+- src: https://github.com/ajanis/ansible-nfs.git
   name: nfs
