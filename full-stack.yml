@@ -1,5 +1,5 @@
 - name: Deploy OpenLDAP Server
-  hosts: ldapserver
+  hosts: ldapservers
   remote_user: root
 
   vars_files:

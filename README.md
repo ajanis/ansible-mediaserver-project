@@ -8,6 +8,17 @@ Deploy a full media-server / media-services environment with download agents, li
 
 [Ansible-Docker][] role is needed to set up media services
 
+The following ansible groups must be defined
+ - mediaservices
+    - plexservers
+    - nzbservices
+ - webservices *only if deploying NGINX reverse proxy*
+ - ldapservers *only if deploying an LDAP server*
+   + samba
+   + afpd
+ - nfsservers *only if deploying nfs server*
+ - metrics *only if deploying InfluxDB and Grafana servers and the Varken container*
+
 ## Requirements
 
 #### Docker Role variables for media server / service containers
@@ -1054,6 +1065,7 @@ docker_containers:
         name: common
     - include_role:
         name: mediaserver
+      when: "'mediaservices' in group_names"
     - include_role:
         name: docker
       when: "'mediaservices' in group_names"
