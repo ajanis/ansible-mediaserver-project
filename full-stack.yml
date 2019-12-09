@@ -1,104 +1,66 @@
-- name: Deploy OpenLDAP Server
-  hosts: ldapservers
-  remote_user: root
-
-  vars_files:
-    - vault.yml
-
-  tasks:
-    - include_role:
-        name: common
-    - include_role:
-        name: openldap
-        public: True
-    - include_role:
-        name: ceph-fs
-      when:
-        - shared_storage
-        - storage_backend == "cephfs"
-    - include_role:
-        name: nfs
-      when:
-        - shared_storage
-        - storage_backend == "nfs"
-    - include_role:
-        name: telegraf
-
-
-- name: Deploy InfluxDB and Grafana
-  hosts: metrics
-  remote_user: root
-
-  vars_files:
-    - vault.yml
-
-  tasks:
-    - include_role:
-        name: common
-    - include_role:
-        name: openldap
-        public: True
-    - include_role:
-        name: ceph-fs
-      when:
-        - shared_storage
-        - storage_backend == "cephfs"
-    - include_role:
-        name: nfs
-      when:
-        - shared_storage
-        - storage_backend == "nfs"
-    - include_role:
-        name: influxdb
-      tags:
-        - install
-        - configure
-        - influxdb
-        - verify
-        - stress
-        - demo
-        - prometheus
-    - include_role:
-        name: grafana
-      tags:
-        - install
-        - configure
-        - grafana
-        - backup
-    - include_role:
-        name: telegraf
-
-
 - name: Deploy Media Server and Services
-  hosts: mediaserver
+  hosts:
+    - mediaservices
+    - plexservers
+    - nzbservices
+    - webservices
+    - ldapservers
+    - influxdb
+    - grafana
   remote_user: root
+  gather_facts: true
 
   vars_files:
     - vault.yml
 
   tasks:
-    - include_role:
-        name: common
-    - include_role:
-        name: openldap
-        public: True
-    - include_role:
-        name: ceph-fs
-      when:
-        - shared_storage
-        - storage_backend == "cephfs"
-    - include_role:
-        name: nfs
-      when:
-        - shared_storage
-        - storage_backend == "nfs"
-    - include_role:
-        name: mediaserver
-        public: True
+    - name: Deploy common, openldap-client, and ceph-fs services
+      block:
+        - import_role:
+            name: common
+        - import_role:
+            name: openldap
+          when:  openldap_server_ip is defined and openldap_server_ip != None
+        - import_role:
+            name: ceph-fs
+          when:
+            - shared_storage
+            - storage_backend == "cephfs"
+        - import_role:
+            name: nfs
+          when:
+            - shared_storage
+            - storage_backend == "nfs"
+
+    - name: Deploy InfluxDB
+      block:
+        - include_role:
+            name: influxdb
+      when: "'influxdb' in group_names"
+
+    - name: Deploy Grafana
+      block:
+        - include_role:
+            name: grafana
+      when: "'grafana' in group_names"
+
+    - name: Deploy Mediaserver prerequisites
+      block:
+        - import_role:
+            name: mediaserver
+        - import_role:
+            name: docker
       when: "'mediaservices' in group_names"
-    - include_role:
-        name: docker
-        public: True
-      when: "'mediaservices' in group_names"
-    - include_role:
-        name: telegraf
+
+
+    - name: "Configure NGINX reverse-proxy for Foreman and AWX/Tower"
+      block:
+        - import_role:
+            name: nginx
+      when: "'webservices' in group_names"
+
+    - name: Configure Telegraf
+      block:
+        - import_role:
+            name: telegraf
+        - setup:
