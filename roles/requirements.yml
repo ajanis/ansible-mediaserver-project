@@ -1,21 +1,84 @@
 ---
-- src: https://github.com/ajanis/ansible-openldap.git
-  name: openldap
+- src: https://github.com/ajanis/ansible-foreman.git
+  name: foreman
+  version: master
+
 - src: https://github.com/ajanis/ansible-nginx.git
   name: nginx
+  version: master
+
 - src: https://github.com/ajanis/ansible-common.git
   name: common
+  version: master
+
 - src: https://github.com/ajanis/ansible-docker.git
   name: docker
-- src: https://github.com/ajanis/ansible-ceph-fs.git
-  name: ceph-fs
+  version: master
+
+- src: https://github.com/ajanis/ansible-isc_dhcp_server.git
+  name: isc_dhcp_server
+  version: master
+
+- src: https://github.com/ajanis/ansible-tftp.git
+  name: tftp
+  version: master
+
+- src: https://github.com/constructorfleet/ansible-awx.git
+  name: awx
+  version: master
+
+- src: https://github.com/ajanis/ansible-project.git
+  name: ansible-project
+  version: master
+
 - src: https://github.com/ajanis/ansible-mediaserver.git
   name: mediaserver
-- src: https://github.com/ajanis/ansible-telegraf.git
-  name: telegraf
-- src: https://github.com/ajanis/ansible-influxdb.git
-  name: influxdb
-- src: https://github.com/constructorfleet/ansible-grafana.git
-  name: grafana
+  version: master
+
+- src: https://github.com/ajanis/ansible-ceph-fs.git
+  name: ceph-fs
+  version: master
+
 - src: https://github.com/ajanis/ansible-nfs.git
   name: nfs
+  version: master
+
+- src: https://github.com/ajanis/ansible-openldap.git
+  name: openldap
+  version: master
+
+- src: https://github.com/ajanis/ansible-chronograf.git
+  name: chronograf
+  version: master
+
+- src: https://github.com/ajanis/ansible-kapacitor.git
+  name: kapacitor
+  version: master
+
+- src: https://github.com/ajanis/ansible-influxdb.git
+  name: influxdb
+  version: master
+
+- src: https://github.com/ajanis/ansible-telegraf.git
+  name: telegraf
+  version: master
+
+- src: https://github.com/constructorfleet/ansible-grafana.git
+  name: grafana
+  version: master
+
+- src: https://github.com/constructorfleet/ansible-iot_firewall_allow.git
+  name: iot_firewall_allow
+  version: master
+
+- src: https://github.com/ajanis/ansible-kvm.git
+  name: kvm
+  version: master
+
+- src: https://github.com/ajanis/ansible-unifi.git
+  name: unifi
+  version: master
+
+#- src: https://github.com:constructorfleet/ansible-automation-cluster.git
+#  name: automation_cluster
+#  version: master
